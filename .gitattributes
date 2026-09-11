@@ -1,0 +1,13 @@
+* text=auto
+
+# Never line-ending-convert these. The YGA PDF is ASCII85-encoded, so git
+# heuristically reads it as text and would corrupt it on checkout without this.
+*.pdf  binary
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.woff  binary
+*.woff2 binary

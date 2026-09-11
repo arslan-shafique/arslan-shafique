@@ -1,0 +1,15 @@
+# OS / OneDrive
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Vercel
+.vercel
+
+# Duplicate originals - the site serves the copies in assets/docs/
+/Arslan Shafique - Experience Letter (YGA).pdf
+/Arslan_Shafique_Internship_Experience_Letter.pdf
