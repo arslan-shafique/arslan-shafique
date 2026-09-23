@@ -653,7 +653,7 @@ svg {
   transition: transform .25s var(--ease), box-shadow .25s var(--ease);
 }
 .credly__badges a:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 26px -10px rgba(0,0,0,.6); }
-.credly__badges img { width: 76px; height: 76px; object-fit: contain; display: block; }
+.credly__badges img { width: 76px; height: 76px; object-fit: contain; display: block; border-radius: 50%; }
 
 /* =========================================================
    TESTIMONIALS

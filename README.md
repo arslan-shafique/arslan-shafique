@@ -10,6 +10,7 @@ index.html                 the whole page
 assets/
   css/styles.css           design tokens + components (dark & light themes)
   js/main.js               theme toggle, nav, scroll reveal, filters, lightbox, contact form
+  badges/*.png             verified credential artwork shown in the Credly badge strip
   img/arslan.jpg           profile photo
   projects/*.jpg           freelance project screenshots
   docs/*.pdf               experience letters linked from the site
