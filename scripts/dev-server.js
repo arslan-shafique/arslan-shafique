@@ -1,6 +1,6 @@
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
-import { dirname, extname, join, normalize } from "node:path";
+import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import dotenv from "dotenv";
@@ -44,7 +44,8 @@ function serveStatic(response, pathname) {
   const relativePath = pathname === "/" ? "index.html" : pathname.slice(1);
   const filePath = normalize(join(projectRoot, relativePath));
 
-  if (!filePath.startsWith(projectRoot) || !existsSync(filePath) || !statSync(filePath).isFile()) {
+  const isInsideProject = filePath === projectRoot || filePath.startsWith(projectRoot + sep);
+  if (!isInsideProject || !existsSync(filePath) || !statSync(filePath).isFile()) {
     sendJson(response, 404, { error: "Not found." });
     return;
   }

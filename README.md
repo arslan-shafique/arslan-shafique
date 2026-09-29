@@ -1,74 +1,131 @@
-# Arslan Shafique — Portfolio
+# Arslan Shafique - Portfolio
 
-A single-page portfolio site. Plain HTML, CSS and JavaScript — **no build step, no dependencies
-to install**. Open `index.html` in a browser and it works.
+A responsive single-page portfolio with a retrieval-augmented AI assistant. The public interface is
+plain HTML, CSS, and JavaScript; a small Vercel serverless function keeps the OpenAI API key private.
 
-## Structure
+## Chatbot architecture
 
-```
-index.html                 the whole page
-assets/
-  css/styles.css           design tokens + components (dark & light themes)
-  js/main.js               theme toggle, nav, scroll reveal, filters, lightbox, contact form
-  badges/*.png             verified credential artwork shown in the Credly badge strip
-  img/arslan.jpg           profile photo
-  projects/*.jpg           freelance project screenshots
-  docs/*.pdf               experience letters linked from the site
-```
-
-## Editing content
-
-Everything is in `index.html`, in the order it appears on the page. Each section is marked with
-an HTML comment (`<!-- ============ PROJECTS ============ -->`).
-
-**To add a project** — copy an existing `<article class="pcardx">` block and change the text.
-The `data-cat` attribute drives the filter buttons; use one or more of `ai`, `iot`, `web`.
-
-**To add a freelance screenshot** — drop the image in `assets/projects/`, then copy a
-`<figure class="gal__item">` block. The `data-src` attribute is the image the lightbox opens.
-
-**To add a testimonial** — copy a `<figure class="quote">` block. Add `quote--lead` to the class
-to make one span two columns.
-
-**To change the colours** — every colour is a CSS custom property at the top of
-`assets/css/styles.css`, under `:root` (dark) and `[data-theme="light"]` (light).
-
-## Previewing locally
-
-Double-clicking `index.html` works for everything except the profile photo caching. For a proper
-local server, any static server will do, e.g. with Python installed:
-
-```bash
-python -m http.server 8000
+```text
+Visitor question
+      |
+      v
+Browser widget (assets/js/main.js)
+      |
+      v  POST /api/chat
+Security and input validation
+      |
+      v
+Local portfolio retrieval (api/lib/retrieval.js)
+      |
+      v  top matching knowledge chunks
+OpenAI Responses API (server-side only)
+      |
+      v
+Grounded answer + links to relevant portfolio sections
 ```
 
-## Deploying
+This is lightweight RAG: retrieval is local and deterministic, while the model is responsible only
+for composing a concise answer from the retrieved facts. No embeddings database is needed for this
+small knowledge base.
 
-Hosted on **Vercel**, deployed from this GitHub repository. The site is static, so there is no
-build command — Vercel serves the repo root as-is.
+## Project structure
 
-**First-time setup**
-
-1. Push this repo to GitHub.
-2. At [vercel.com/new](https://vercel.com/new), import the repository.
-3. Framework preset: **Other**. Build command: *empty*. Output directory: *empty* (repo root).
-4. Name the Vercel project `arslan-shafique` so the URL is `arslan-shafique.vercel.app`.
-
-**Every update after that**
-
-```bash
-git add -A && git commit -m "Describe the change" && git push
+```text
+index.html                         portfolio page and chatbot markup
+assets/css/styles.css              site and chatbot styling
+assets/js/main.js                  site behaviour and chatbot client
+assets/docs/                       resume and verified experience letters
+api/chat.js                        secure Vercel chat endpoint
+api/lib/portfolio-knowledge.js     curated portfolio knowledge chunks
+api/lib/retrieval.js               tokenisation, aliases, ranking, and fallback
+scripts/dev-server.js              lightweight local static/API server
+test/                              retrieval and API unit tests
+.env.example                       safe environment-variable template
 ```
 
-Vercel redeploys automatically on push to `main`, usually within a minute.
+## Local setup
 
-**Custom domain** — *Project → Settings → Domains* in Vercel. Add the domain, then point its
-DNS at Vercel as instructed. HTTPS is issued automatically.
+Requirements: Node.js 22 or newer and an OpenAI API key.
 
-## Notes
+1. Install dependencies:
 
-- The contact form has no backend. It composes a message in the visitor's own mail client via
-  `mailto:` — nothing is stored or sent by the site itself. Swap in Formspree or Netlify Forms if
-  you want submissions delivered server-side.
-- Theme preference is stored in `localStorage` and falls back to the visitor's OS setting.
-- Fonts load from Google Fonts. Self-host them if you need the page to work fully offline.
+   ```powershell
+   npm.cmd install
+   ```
+
+2. Create your private local environment file:
+
+   ```powershell
+   Copy-Item .env.example .env.local
+   notepad .env.local
+   ```
+
+3. Replace `your_openai_api_key_here` with your API key. Never paste the key into browser code,
+   commit it, or share it in chat. The official OpenAI quickstart explains API-key creation and
+   environment variables: <https://developers.openai.com/api/docs/quickstart>.
+
+4. Start the local site:
+
+   ```powershell
+   npm.cmd run dev
+   ```
+
+5. Open <http://127.0.0.1:3000> and click **Ask my AI**.
+
+## Testing
+
+Run all unit tests:
+
+```powershell
+npm.cmd test
+```
+
+The tests verify retrieval ranking, CV/resume aliases, fallback behaviour, request validation,
+history limits, and that retrieved context is passed to the model. The model client is mocked, so
+tests do not spend API credits.
+
+## Updating chatbot knowledge
+
+Edit `api/lib/portfolio-knowledge.js` whenever the visible portfolio changes. Keep each chunk focused
+on one role, project, skill group, or contact topic. Add likely search terms to `keywords`, then add a
+test for the new information in `test/retrieval.test.js`.
+
+Good chunks are:
+
+- factual and consistent with the public site;
+- short enough to retrieve independently;
+- explicit about dates, technologies, and verification links;
+- free of private information that should not be sent to an API.
+
+## Security and cost controls
+
+- `OPENAI_API_KEY` is read only inside `api/chat.js`.
+- `.env` and `.env.local` are ignored by Git.
+- Requests must be same-origin JSON `POST` requests.
+- Questions are limited to 600 characters and six recent history items.
+- A best-effort per-instance rate limit allows 15 requests per 10 minutes.
+- The model receives only the top four retrieved chunks.
+- Responses use `store: false` and are limited to 450 output tokens.
+- Model output is inserted with `textContent`, not HTML.
+
+For production, create a restricted project API key, set spend alerts, and keep secrets in environment
+variables or a secret manager. See OpenAI's production guidance:
+<https://developers.openai.com/api/docs/guides/production-best-practices>.
+
+## Vercel deployment
+
+The GitHub repository is already connected to Vercel. Before merging the chatbot branch:
+
+1. Open the Vercel project.
+2. Go to **Settings -> Environment Variables**.
+3. Add `OPENAI_API_KEY` for Production and Preview.
+4. Optionally add `OPENAI_MODEL`; the default is `gpt-6-luna`.
+5. Redeploy or merge the branch into the production branch.
+
+Do not prefix the key with `VITE_`, `NEXT_PUBLIC_`, or any other client-visible prefix.
+
+## Editing portfolio content
+
+The visible content is in `index.html`. Project categories use `data-cat="ai"`, `data-cat="iot"`, or
+`data-cat="web"`. Theme colours are CSS custom properties near the top of
+`assets/css/styles.css`. Images and PDFs live under `assets/`.
