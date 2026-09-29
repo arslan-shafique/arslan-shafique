@@ -1,7 +1,7 @@
 # Arslan Shafique - Portfolio
 
 A responsive single-page portfolio with a retrieval-augmented AI assistant. The public interface is
-plain HTML, CSS, and JavaScript; a small Vercel serverless function keeps the OpenAI API key private.
+plain HTML, CSS, and JavaScript; a small Vercel serverless function keeps the Gemini API key private.
 
 ## Chatbot architecture
 
@@ -18,7 +18,7 @@ Security and input validation
 Local portfolio retrieval (api/lib/retrieval.js)
       |
       v  top matching knowledge chunks
-OpenAI Responses API (server-side only)
+Gemini Generate Content API (server-side only)
       |
       v
 Grounded answer + links to relevant portfolio sections
@@ -45,7 +45,7 @@ test/                              retrieval and API unit tests
 
 ## Local setup
 
-Requirements: Node.js 22 or newer and an OpenAI API key.
+Requirements: Node.js 22 or newer and a Gemini API key.
 
 1. Install dependencies:
 
@@ -60,9 +60,9 @@ Requirements: Node.js 22 or newer and an OpenAI API key.
    notepad .env.local
    ```
 
-3. Replace `your_openai_api_key_here` with your API key. Never paste the key into browser code,
-   commit it, or share it in chat. The official OpenAI quickstart explains API-key creation and
-   environment variables: <https://developers.openai.com/api/docs/quickstart>.
+3. Replace `your_gemini_api_key_here` with your Gemini API key. Never paste the key into browser
+   code, commit it, or share it in chat. Google's Gemini documentation explains secure API-key
+   setup: <https://ai.google.dev/gemini-api/docs/api-key>.
 
 4. Start the local site:
 
@@ -99,18 +99,18 @@ Good chunks are:
 
 ## Security and cost controls
 
-- `OPENAI_API_KEY` is read only inside `api/chat.js`.
+- `GEMINI_API_KEY` is read only inside `api/chat.js`.
 - `.env` and `.env.local` are ignored by Git.
 - Requests must be same-origin JSON `POST` requests.
 - Questions are limited to 600 characters and six recent history items.
 - A best-effort per-instance rate limit allows 15 requests per 10 minutes.
 - The model receives only the top four retrieved chunks.
-- Responses use `store: false` and are limited to 450 output tokens.
+- Gemini responses are limited to 450 output tokens.
 - Model output is inserted with `textContent`, not HTML.
 
-For production, create a restricted project API key, set spend alerts, and keep secrets in environment
-variables or a secret manager. See OpenAI's production guidance:
-<https://developers.openai.com/api/docs/guides/production-best-practices>.
+For production, restrict the key to the Gemini API, set billing alerts, and keep secrets in environment
+variables or a secret manager. See Google's Gemini API-key guidance:
+<https://ai.google.dev/gemini-api/docs/api-key>.
 
 ## Vercel deployment
 
@@ -118,8 +118,8 @@ The GitHub repository is already connected to Vercel. Before merging the chatbot
 
 1. Open the Vercel project.
 2. Go to **Settings -> Environment Variables**.
-3. Add `OPENAI_API_KEY` for Production and Preview.
-4. Optionally add `OPENAI_MODEL`; the default is `gpt-6-luna`.
+3. Add `GEMINI_API_KEY` for Production and Preview.
+4. Optionally add `GEMINI_MODEL`; the default is `gemini-3.5-flash`.
 5. Redeploy or merge the branch into the production branch.
 
 Do not prefix the key with `VITE_`, `NEXT_PUBLIC_`, or any other client-visible prefix.

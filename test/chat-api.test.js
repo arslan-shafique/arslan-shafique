@@ -45,10 +45,10 @@ test("keeps only the six most recent history items", () => {
 test("grounds the model request with retrieved context", async () => {
   let capturedRequest;
   const client = {
-    responses: {
-      create: async (request) => {
+    models: {
+      generateContent: async (request) => {
         capturedRequest = request;
-        return { output_text: "Arslan completed an AI Engineer internship at Techohub Systems." };
+        return { text: "Arslan completed an AI Engineer internship at Techohub Systems." };
       },
     },
   };
@@ -60,8 +60,9 @@ test("grounds the model request with retrieved context", async () => {
   });
 
   assert.equal(capturedRequest.model, "test-model");
-  assert.equal(capturedRequest.store, false);
-  assert.match(capturedRequest.input[0].content, /AI Engineer internship at Techohub Systems/);
-  assert.equal(capturedRequest.input.at(-1).content, "What did Arslan do at Techohub?");
+  assert.equal(capturedRequest.config.maxOutputTokens, 450);
+  assert.equal(capturedRequest.config.thinkingConfig.thinkingLevel, "minimal");
+  assert.match(capturedRequest.config.systemInstruction, /AI Engineer internship at Techohub Systems/);
+  assert.equal(capturedRequest.contents.at(-1).parts[0].text, "What did Arslan do at Techohub?");
   assert.equal(result.sources[0].title, "AI Engineer internship at Techohub Systems");
 });

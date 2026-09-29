@@ -1,8 +1,8 @@
-import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 
 import { formatRetrievedContext, retrievePortfolioContext } from "./lib/retrieval.js";
 
-const DEFAULT_MODEL = "gpt-6-luna";
+const DEFAULT_MODEL = "gemini-3.5-flash";
 const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_ITEMS = 6;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -103,23 +103,25 @@ function consumeRateLimit(identifier, now = Date.now()) {
 export async function answerPortfolioQuestion({ message, history = [], client, model = DEFAULT_MODEL }) {
   const retrieved = retrievePortfolioContext(message, 4);
   const context = formatRetrievedContext(retrieved);
-  const input = [
-    {
-      role: "developer",
-      content: `${assistantInstructions}\n\nRetrieved portfolio context:\n${context}`,
-    },
-    ...history,
-    { role: "user", content: message },
+  const contents = [
+    ...history.map(({ role, content }) => ({
+      role: role === "assistant" ? "model" : "user",
+      parts: [{ text: content }],
+    })),
+    { role: "user", parts: [{ text: message }] },
   ];
 
-  const response = await client.responses.create({
+  const response = await client.models.generateContent({
     model,
-    input,
-    max_output_tokens: 450,
-    store: false,
+    contents,
+    config: {
+      systemInstruction: `${assistantInstructions}\n\nRetrieved portfolio context:\n${context}`,
+      maxOutputTokens: 450,
+      thinkingConfig: { thinkingLevel: "minimal" },
+    },
   });
 
-  const answer = cleanText(response.output_text, 4_000);
+  const answer = cleanText(response.text, 4_000);
   if (!answer) throw new Error("The model returned an empty response.");
 
   return {
@@ -151,18 +153,18 @@ export default async function handler(request, response) {
     return response.status(429).json({ error: "Too many questions. Please try again shortly." });
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     return response.status(503).json({ error: "The portfolio assistant is not configured yet." });
   }
 
   try {
     const { message, history } = validateChatPayload(request.body);
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const result = await answerPortfolioQuestion({
       message,
       history,
       client,
-      model: process.env.OPENAI_MODEL || DEFAULT_MODEL,
+      model: process.env.GEMINI_MODEL || DEFAULT_MODEL,
     });
 
     return response.status(200).json(result);
@@ -177,7 +179,7 @@ export default async function handler(request, response) {
       message: error?.message,
     });
 
-    if (error?.status === 429) {
+    if (error?.status === 429 || error?.status === 503) {
       return response.status(503).json({ error: "The assistant is busy right now. Please try again shortly." });
     }
 

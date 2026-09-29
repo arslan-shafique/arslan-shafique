@@ -16,7 +16,7 @@
     "portfolio",
     "rag",
     "chatbot",
-    "openai"
+    "gemini"
   ],
   "author": "Arslan Shafique",
   "license": "ISC",
@@ -28,10 +28,10 @@
     "url": "https://github.com/arslan-shafique/arslan-shafique/issues"
   },
   "homepage": "https://github.com/arslan-shafique/arslan-shafique#readme",
-  "dependencies": {
-    "openai": "^7.23.0"
-  },
   "devDependencies": {
     "dotenv": "^18.0.3"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0"
   }
 }
