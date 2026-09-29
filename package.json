@@ -1,0 +1,37 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arslan Shafique's portfolio website with a retrieval-augmented AI assistant.",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arslan-shafique/arslan-shafique.git"
+  },
+  "keywords": [
+    "portfolio",
+    "rag",
+    "chatbot",
+    "gemini"
+  ],
+  "author": "Arslan Shafique",
+  "license": "ISC",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bugs": {
+    "url": "https://github.com/arslan-shafique/arslan-shafique/issues"
+  },
+  "homepage": "https://github.com/arslan-shafique/arslan-shafique#readme",
+  "devDependencies": {
+    "dotenv": "^18.0.3"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0"
+  }
+}

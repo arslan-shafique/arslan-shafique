@@ -288,6 +288,161 @@
   }
 
   /* ---------------------------------------------------------
+     Portfolio chatbot — browser UI only; the API key stays server-side
+     --------------------------------------------------------- */
+  var chatToggle = $('#chatToggle');
+  var chatPanel = $('#chatPanel');
+  var chatClose = $('#chatClose');
+  var chatMessages = $('#chatMessages');
+  var chatSuggestions = $('#chatSuggestions');
+  var chatForm = $('#chatForm');
+  var chatInput = $('#chatInput');
+  var chatSend = $('#chatSend');
+  var chatStatus = $('#chatStatus');
+  var chatHistory = [];
+  var chatBusy = false;
+
+  function setChatOpen(open) {
+    if (!chatPanel || !chatToggle) return;
+    chatPanel.hidden = !open;
+    chatToggle.setAttribute('aria-expanded', String(open));
+    chatToggle.querySelector('span').textContent = open ? 'Close AI' : 'Ask my AI';
+    if (open && chatInput) window.setTimeout(function () { chatInput.focus(); }, 50);
+    if (!open) chatToggle.focus();
+  }
+
+  function scrollChatToEnd() {
+    if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function appendChatMessage(role, text, sources) {
+    if (!chatMessages) return null;
+
+    var item = document.createElement('div');
+    item.className = 'chatmsg chatmsg--' + role;
+
+    if (role === 'assistant') {
+      var avatar = document.createElement('span');
+      avatar.className = 'chatmsg__avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = 'AI';
+      item.appendChild(avatar);
+    }
+
+    var bubble = document.createElement('div');
+    bubble.className = 'chatmsg__bubble';
+    bubble.textContent = text;
+
+    if (role === 'assistant' && Array.isArray(sources) && sources.length) {
+      var sourceList = document.createElement('div');
+      sourceList.className = 'chatmsg__sources';
+
+      sources.slice(0, 3).forEach(function (source) {
+        if (!source || !/^#[a-z][a-z0-9-]*$/i.test(source.href || '')) return;
+        var link = document.createElement('a');
+        link.href = source.href;
+        link.textContent = source.section || source.title || 'Portfolio section';
+        link.addEventListener('click', function () { setChatOpen(false); });
+        sourceList.appendChild(link);
+      });
+
+      if (sourceList.children.length) bubble.appendChild(sourceList);
+    }
+
+    item.appendChild(bubble);
+    chatMessages.appendChild(item);
+    scrollChatToEnd();
+    return item;
+  }
+
+  function appendThinkingMessage() {
+    if (!chatMessages) return null;
+    var item = document.createElement('div');
+    item.className = 'chatmsg chatmsg--assistant chatmsg--thinking';
+    item.setAttribute('aria-label', 'Assistant is thinking');
+    item.innerHTML = '<span class="chatmsg__avatar" aria-hidden="true">AI</span><div class="chatmsg__bubble"><i></i><i></i><i></i></div>';
+    chatMessages.appendChild(item);
+    scrollChatToEnd();
+    return item;
+  }
+
+  function setChatBusy(busy) {
+    chatBusy = busy;
+    if (chatInput) chatInput.disabled = busy;
+    if (chatSend) chatSend.disabled = busy;
+    if (chatSuggestions) {
+      $$('button', chatSuggestions).forEach(function (button) { button.disabled = busy; });
+    }
+    if (chatStatus) {
+      chatStatus.textContent = busy
+        ? 'Searching the portfolio…'
+        : 'AI can make mistakes. Verify important details using the portfolio links.';
+    }
+  }
+
+  async function askPortfolio(question) {
+    var cleanQuestion = String(question || '').trim();
+    if (!cleanQuestion || chatBusy) return;
+
+    appendChatMessage('user', cleanQuestion);
+    if (chatInput) chatInput.value = '';
+    setChatBusy(true);
+    var thinking = appendThinkingMessage();
+    var controller = new AbortController();
+    var timeout = window.setTimeout(function () { controller.abort(); }, 30000);
+
+    try {
+      var response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: cleanQuestion, history: chatHistory.slice(-6) }),
+        signal: controller.signal
+      });
+      var payload = await response.json().catch(function () { return {}; });
+      if (!response.ok) throw new Error(payload.error || 'The assistant is unavailable right now.');
+
+      if (thinking) thinking.remove();
+      appendChatMessage('assistant', payload.answer, payload.sources);
+      chatHistory.push(
+        { role: 'user', content: cleanQuestion },
+        { role: 'assistant', content: payload.answer }
+      );
+      chatHistory = chatHistory.slice(-6);
+    } catch (error) {
+      if (thinking) thinking.remove();
+      var message = error.name === 'AbortError'
+        ? 'The assistant took too long to respond. Please try again.'
+        : error.message || 'The assistant is unavailable right now.';
+      appendChatMessage('assistant', message);
+    } finally {
+      window.clearTimeout(timeout);
+      setChatBusy(false);
+      if (chatInput) chatInput.focus();
+    }
+  }
+
+  if (chatToggle && chatPanel) {
+    chatToggle.addEventListener('click', function () {
+      setChatOpen(chatPanel.hidden);
+    });
+  }
+  if (chatClose) chatClose.addEventListener('click', function () { setChatOpen(false); });
+  if (chatForm) {
+    chatForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      askPortfolio(chatInput && chatInput.value);
+    });
+  }
+  if (chatSuggestions) {
+    $$('[data-chat-question]', chatSuggestions).forEach(function (button) {
+      button.addEventListener('click', function () { askPortfolio(button.dataset.chatQuestion); });
+    });
+  }
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && chatPanel && !chatPanel.hidden) setChatOpen(false);
+  });
+
+  /* ---------------------------------------------------------
      Footer year
      --------------------------------------------------------- */
   var yearEl = $('#year');
