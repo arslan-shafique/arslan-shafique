@@ -1042,6 +1042,52 @@
   </div>
 </footer>
 
+<!-- ============ PORTFOLIO CHATBOT ============ -->
+<aside class="chatbot" aria-label="Portfolio AI assistant">
+  <section class="chatbot__panel" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>
+    <header class="chatbot__head">
+      <span class="chatbot__avatar" aria-hidden="true">AS</span>
+      <span class="chatbot__identity">
+        <strong id="chatTitle">Ask Arslan's AI</strong>
+        <span><i aria-hidden="true"></i> Answers from this portfolio</span>
+      </span>
+      <button class="chatbot__close" id="chatClose" type="button" aria-label="Close portfolio assistant">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="chatbot__messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions">
+      <div class="chatmsg chatmsg--assistant">
+        <span class="chatmsg__avatar" aria-hidden="true">AI</span>
+        <div class="chatmsg__bubble">
+          Hi! I can answer questions about Arslan's experience, projects, skills, certifications, and résumé.
+        </div>
+      </div>
+    </div>
+
+    <div class="chatbot__suggestions" id="chatSuggestions" aria-label="Suggested questions">
+      <button type="button" data-chat-question="What AI projects has Arslan built?">AI projects</button>
+      <button type="button" data-chat-question="What did Arslan do at Techohub?">Experience</button>
+      <button type="button" data-chat-question="What are Arslan's strongest skills?">Top skills</button>
+      <button type="button" data-chat-question="Where can I download Arslan's resume?">Résumé</button>
+    </div>
+
+    <form class="chatbot__form" id="chatForm">
+      <label class="visually-hidden" for="chatInput">Ask a question about Arslan</label>
+      <input id="chatInput" name="message" type="text" maxlength="600" autocomplete="off" placeholder="Ask about experience, projects, skills…" required>
+      <button id="chatSend" type="submit" aria-label="Send question">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 4 17 8-17 8 3-8-3-8Z"/><path d="M7 12h14"/></svg>
+      </button>
+    </form>
+    <p class="chatbot__status" id="chatStatus">AI can make mistakes. Verify important details using the portfolio links.</p>
+  </section>
+
+  <button class="chatbot__toggle" id="chatToggle" type="button" aria-controls="chatPanel" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18.5 3 21v-5.2A8 8 0 0 1 4 4h16v12H8.5L5 18.5Z"/><path d="M8 9h8M8 12h5"/></svg>
+    <span>Ask my AI</span>
+  </button>
+</aside>
+
 <!-- lightbox -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Project image" hidden>
   <button class="lb__close" id="lbClose" type="button" aria-label="Close">&times;</button>
