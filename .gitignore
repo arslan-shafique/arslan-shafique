@@ -13,3 +13,11 @@ desktop.ini
 # Duplicate originals - the site serves the copies in assets/docs/
 /Arslan Shafique - Experience Letter (YGA).pdf
 /Arslan_Shafique_Internship_Experience_Letter.pdf
+
+# Node.js dependencies
+node_modules/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
