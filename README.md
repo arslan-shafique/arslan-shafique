@@ -51,10 +51,13 @@ An ESP32-CAM streams live video to a FastAPI and OpenCV recognition service, whi
 
 > **Currently contributing to [Oppia](https://github.com/oppia/oppia)** — an open-source educational platform making quality learning accessible worldwide.
 
-My [pull request #27564](https://github.com/oppia/oppia/pull/27564) improves Python backend migration logic and adds focused tests that achieve **100% line and branch coverage** for `question_domain.py`.
+My [Oppia pull request #27564](https://github.com/oppia/oppia/pull/27564) improves Python backend migration logic and adds focused tests that achieve **100% line and branch coverage** for `question_domain.py`.
+
+My [Pylint pull request #11646](https://github.com/pylint-dev/pylint/pull/11646) adds the new `misplaced-module-dunder` convention check, together with functional tests, documentation, examples, and CI follow-up fixes.
 
 <p>
   <a href="https://github.com/oppia/oppia/pull/27564"><img src="https://img.shields.io/badge/Oppia_PR_%2327564-Under_Review-7C3AED?style=for-the-badge&logo=github&logoColor=white" alt="Oppia pull request 27564 under review"></a>
+  <a href="https://github.com/pylint-dev/pylint/pull/11646"><img src="https://img.shields.io/badge/Pylint_PR_%2311646-Under_Review-3776AB?style=for-the-badge&logo=github&logoColor=white" alt="Pylint pull request 11646 under review"></a>
 </p>
 
 ## 🧰 Technology toolkit

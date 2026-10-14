@@ -39,6 +39,7 @@
     <nav class="nav__links" id="navLinks" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#open-source">Open Source</a>
       <a href="#projects">Projects</a>
       <a href="#achievements">Achievements</a>
       <a href="#freelance">Freelance</a>
@@ -86,8 +87,9 @@
       <p class="hero__lede reveal">
         I build intelligent systems that reach off the screen — large language models and
         retrieval pipelines on the software side, ESP32 sensors and embedded firmware on the
-        hardware side. My recent work includes <strong>AI engineering at Techohub Systems</strong>,
-        and I am a 2026 Computer Science graduate of the University of Central Punjab.
+        hardware side. My recent work includes <strong>AI engineering at Techohub Systems</strong>
+        and contributions to <strong>Oppia</strong> and <strong>Pylint</strong>. I am a 2026 Computer
+        Science graduate of the University of Central Punjab.
       </p>
 
       <div class="hero__actions reveal">
@@ -146,7 +148,7 @@
   <div class="wrap">
     <ul class="stats reveal">
       <li><strong>5+</strong><span>Years writing code</span></li>
-      <li><strong>9</strong><span>Public repositories</span></li>
+      <li><strong>2</strong><span>Open-source PRs</span></li>
       <li><strong>15</strong><span>Certifications</span></li>
       <li><strong>5★</strong><span>Freelance client rating</span></li>
     </ul>
@@ -334,11 +336,86 @@
   </div>
 </section>
 
-<!-- ============ PROJECTS ============ -->
-<section id="projects" class="section">
+<!-- ============ OPEN SOURCE ============ -->
+<section id="open-source" class="section">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">03 — Projects</p>
+      <p class="sec-kicker">03 — Open Source</p>
+      <h2 class="sec-title">Contributing beyond my own codebase</h2>
+      <p class="sec-sub">
+        Production-scale Python work shaped through maintainer feedback, automated tests and
+        public code review.
+      </p>
+    </header>
+
+    <div class="oss-grid">
+      <article class="oss-card reveal">
+        <div class="oss-card__top">
+          <div class="oss-card__org">
+            <span class="oss-card__mark" aria-hidden="true">O</span>
+            <div>
+              <h3>Oppia</h3>
+              <p>Open-source education platform</p>
+            </div>
+          </div>
+          <span class="oss-status"><span aria-hidden="true"></span> Under review</span>
+        </div>
+        <p class="oss-card__eyebrow">Backend testing · PR #27564</p>
+        <h4>Cover branches in <code>question_domain.py</code></h4>
+        <p>
+          Strengthened a core question-domain migration path with focused Python tests, covering
+          edge cases across rule inputs, answer migration and validation. The change adds 300+
+          lines of test coverage while simplifying guarded branches in the production code.
+        </p>
+        <ul class="chips chips--sm">
+          <li>Python</li><li>Backend</li><li>Unit Testing</li><li>Branch Coverage</li><li>Code Review</li>
+        </ul>
+        <a class="oss-card__link" href="https://github.com/oppia/oppia/pull/27564" target="_blank" rel="noopener noreferrer">
+          View pull request
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <article class="oss-card reveal">
+        <div class="oss-card__top">
+          <div class="oss-card__org">
+            <span class="oss-card__mark oss-card__mark--violet" aria-hidden="true">P</span>
+            <div>
+              <h3>Pylint</h3>
+              <p>Python static code analyser</p>
+            </div>
+          </div>
+          <span class="oss-status"><span aria-hidden="true"></span> Under review</span>
+        </div>
+        <p class="oss-card__eyebrow">Static analysis · PR #11646</p>
+        <h4>Add the <code>misplaced-module-dunder</code> check</h4>
+        <p>
+          Implemented a new convention check that flags independent module-level dunder metadata
+          placed after regular imports. The contribution includes checker logic, functional tests,
+          documentation, examples and CI follow-up fixes.
+        </p>
+        <ul class="chips chips--sm">
+          <li>Python</li><li>AST Analysis</li><li>Linters</li><li>Functional Tests</li><li>Documentation</li>
+        </ul>
+        <a class="oss-card__link" href="https://github.com/pylint-dev/pylint/pull/11646" target="_blank" rel="noopener noreferrer">
+          View pull request
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+    </div>
+
+    <p class="oss-note reveal">
+      Both contributions are active and publicly reviewable on GitHub.
+      <a href="https://github.com/arslan-shafique?tab=pull-requests" target="_blank" rel="noopener noreferrer">Follow my contribution activity</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="section section--alt">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-kicker">04 — Projects</p>
       <h2 class="sec-title">Selected work</h2>
       <p class="sec-sub">AI, embedded systems and full-stack builds — academic, industry and personal.</p>
     </header>
@@ -521,7 +598,7 @@
 <section id="achievements" class="section">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">04 — Achievements</p>
+      <p class="sec-kicker">05 — Achievements</p>
       <h2 class="sec-title">Recognition</h2>
     </header>
 
@@ -581,7 +658,7 @@
 <section id="freelance" class="section section--alt">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">05 — Freelance</p>
+      <p class="sec-kicker">06 — Freelance</p>
       <h2 class="sec-title">Client work, shipped</h2>
       <p class="sec-sub">
         Frontend projects delivered to clients on Fiverr, Upwork and locally between 2020 and 2023 —
@@ -637,7 +714,7 @@
 <section id="skills" class="section">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">06 — Skills</p>
+      <p class="sec-kicker">07 — Skills</p>
       <h2 class="sec-title">Toolkit</h2>
     </header>
 
@@ -710,7 +787,7 @@
 <section id="certifications" class="section section--alt">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">07 — Certifications</p>
+      <p class="sec-kicker">08 — Certifications</p>
       <h2 class="sec-title">Licences &amp; certifications</h2>
       <p class="sec-sub">Fifteen completed programmes, most recent first.</p>
     </header>
@@ -912,7 +989,7 @@
 <section id="testimonials" class="section">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="sec-kicker">08 — Testimonials</p>
+      <p class="sec-kicker">09 — Testimonials</p>
       <h2 class="sec-title">What clients said</h2>
       <p class="sec-sub">Reviews left by freelance clients on completed orders.</p>
     </header>
@@ -968,7 +1045,7 @@
   <div class="wrap">
     <div class="cta reveal">
       <div class="cta__copy">
-        <p class="sec-kicker">09 — Contact</p>
+        <p class="sec-kicker">10 — Contact</p>
         <h2 class="sec-title">Let's build something</h2>
         <p class="sec-sub">
           Open to AI / ML engineering roles and interesting freelance briefs.

@@ -17,6 +17,16 @@ test("retrieves the BCG project for financial chatbot questions", () => {
   assert.equal(first.id, "project-financial-chatbot");
 });
 
+test("retrieves the Pylint contribution for open-source linter questions", () => {
+  const [first] = retrievePortfolioContext("What open-source work did Arslan do for Pylint?");
+  assert.equal(first.id, "open-source-pylint");
+});
+
+test("retrieves the Oppia contribution for coverage questions", () => {
+  const [first] = retrievePortfolioContext("Tell me about Arslan's Oppia branch coverage contribution");
+  assert.equal(first.id, "open-source-oppia");
+});
+
 test("understands CV as an alias for resume", () => {
   const [first] = retrievePortfolioContext("Where can I download his CV?");
   assert.equal(first.id, "contact-resume");

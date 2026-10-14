@@ -54,6 +54,24 @@ export const portfolioKnowledge = [
       "Arslan worked as a freelance video editor from December 2022 to July 2023 and as a part-time video editor for Youth General Assembly from November 2022 to January 2023. He edited event and client videos in Adobe Premiere Pro. A verified Youth General Assembly experience letter is available on the portfolio.",
   },
   {
+    id: "open-source-oppia",
+    title: "Oppia open-source contribution",
+    section: "Open Source",
+    href: "#open-source",
+    keywords: ["open source", "opensource", "contribution", "oppia", "pull request", "pr", "testing", "coverage", "question domain"],
+    content:
+      "Arslan authored Oppia pull request #27564, titled 'Fix part of #21308: Cover branches in question_domain.py'. The active contribution strengthens question-domain migration logic and adds more than 300 lines of focused Python tests covering rule inputs, answer migration, validation, and previously uncovered branches. The pull request is publicly available at https://github.com/oppia/oppia/pull/27564 and is currently under review.",
+  },
+  {
+    id: "open-source-pylint",
+    title: "Pylint open-source contribution",
+    section: "Open Source",
+    href: "#open-source",
+    keywords: ["open source", "opensource", "contribution", "pylint", "pull request", "pr", "linter", "static analysis", "dunder", "ast"],
+    content:
+      "Arslan authored Pylint pull request #11646, titled 'Add misplaced-module-dunder check'. The active contribution adds a new convention check for independent module-level dunder metadata placed after regular imports. It includes AST-based checker logic, functional tests, documentation, examples, and CI follow-up fixes. The pull request is publicly available at https://github.com/pylint-dev/pylint/pull/11646 and is currently under review.",
+  },
+  {
     id: "project-baby-band",
     title: "Smart Baby Band",
     section: "Projects",
