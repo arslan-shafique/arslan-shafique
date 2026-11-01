@@ -39,7 +39,7 @@ I am a Computer Science graduate based in Lahore, Pakistan. My work spans **AI/M
 
 | Project | Contribution | Engineering proof | Status |
 | --- | --- | --- | --- |
-| **[Oppia](https://github.com/oppia/oppia)** | [PR #27564 — question-domain migration and branch coverage](https://github.com/oppia/oppia/pull/27564) | Fixed backend migration logic, added focused domain tests, reached 100% line and branch coverage for the target module, addressed reviewer feedback, and passed backend unit, lint, and type checks | Re-review requested |
+| **[Oppia](https://github.com/oppia/oppia)** | [PR #27564 — question-domain migration and branch coverage](https://github.com/oppia/oppia/pull/27564) | Added a typed enum to restrict migration inputs, expanded focused domain tests to 100% line and branch coverage for the target module, addressed two rounds of maintainer feedback, and passed backend unit, lint, and type checks | Branch updated; CI awaiting maintainer approval |
 | **[Pylint](https://github.com/pylint-dev/pylint)** | [PR #11646 — `misplaced-module-dunder` check](https://github.com/pylint-dev/pylint/pull/11646) | Added a new Python convention diagnostic, functional tests, message examples, documentation, a news fragment, and CI follow-up fixes across 26 files | Awaiting maintainer review |
 
 <p>
