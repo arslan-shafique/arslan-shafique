@@ -148,9 +148,9 @@ export const portfolioKnowledge = [
     title: "Certifications and verified credentials",
     section: "Certifications",
     href: "#certifications",
-    keywords: ["certification", "certificate", "credential", "badge", "credly", "ibm", "forage", "coursera", "udemy"],
+    keywords: ["certification", "certificate", "credential", "badge", "credly", "ibm", "forage", "coursera", "udemy", "edureka", "tinyml", "on-device"],
     content:
-      "The portfolio lists 15 completed programmes. Recent credentials include the BCG GenAI Job Simulation on Forage and seven IBM Developer Skills Network credentials covering generative AI applications, agents using RAG and LangChain, advanced LLM fine-tuning, transformers, language modelling, foundational NLP models, and LLM architecture and data preparation. Verification links open the issuing platforms including Forage, Credly, Coursera, and Udemy.",
+      "The portfolio lists 16 completed programmes. The newest credential is TinyML and On-Device Machine Learning, issued by Edureka through Coursera on October 30, 2026. Other recent credentials include the BCG GenAI Job Simulation on Forage and seven IBM Developer Skills Network credentials covering generative AI applications, agents using RAG and LangChain, advanced LLM fine-tuning, transformers, language modelling, foundational NLP models, and LLM architecture and data preparation. Verification links open the issuing platforms including Coursera, Forage, Credly, and Udemy.",
   },
   {
     id: "contact-resume",
