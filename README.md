@@ -27,7 +27,7 @@ I am a Computer Science graduate based in Lahore, Pakistan. My work spans **AI/M
 | Current direction | Evidence |
 | --- | --- |
 | Building production-minded AI systems | LLM/RAG applications, FastAPI services, model evaluation, and database integration |
-| Contributing to established Python projects | Active pull requests in Oppia and Pylint, with tests, documentation, typing, linting, and review iterations |
+| Contributing to established Python and research projects | Active pull requests in Oppia, Pylint, and Braindecode, spanning typed application code, developer tooling, and scientific deep-learning models |
 | Connecting software with the physical world | Award-winning Smart Baby Band plus ESP32-CAM attendance and sensor-driven systems |
 | Growing in public | Every featured project and contribution links to inspectable code, commits, tests, or review history |
 
@@ -39,10 +39,12 @@ I am a Computer Science graduate based in Lahore, Pakistan. My work spans **AI/M
 
 | Project | Contribution | Engineering proof | Status |
 | --- | --- | --- | --- |
+| **[Braindecode](https://github.com/braindecode/braindecode)** | [PR #1562 — TCCNet temporal-convolution model](https://github.com/braindecode/braindecode/pull/1562) | Ported the ICASSP 2019 TCCNet architecture to PyTorch with average-over-time and attention heads, variable-length masking, pinned-source attribution, model and documentation registration, and independent NumPy output/gradient parity tests | CI passed; awaiting maintainer review |
 | **[Oppia](https://github.com/oppia/oppia)** | [PR #27564 — question-domain migration and branch coverage](https://github.com/oppia/oppia/pull/27564) | Added a typed enum to restrict migration inputs, expanded focused domain tests to 100% line and branch coverage for the target module, addressed two rounds of maintainer feedback, and passed backend unit, lint, and type checks | Branch updated; CI awaiting maintainer approval |
 | **[Pylint](https://github.com/pylint-dev/pylint)** | [PR #11646 — `misplaced-module-dunder` check](https://github.com/pylint-dev/pylint/pull/11646) | Added a new Python convention diagnostic, functional tests, message examples, documentation, a news fragment, and CI follow-up fixes across 26 files | Awaiting maintainer review |
 
 <p>
+  <a href="https://github.com/braindecode/braindecode/pull/1562"><img src="https://img.shields.io/badge/Braindecode-PR_%231562-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="Braindecode pull request 1562"></a>
   <a href="https://github.com/oppia/oppia/pull/27564"><img src="https://img.shields.io/badge/Oppia-PR_%2327564-7C3AED?style=flat-square&logo=github&logoColor=white" alt="Oppia pull request 27564"></a>
   <a href="https://github.com/pylint-dev/pylint/pull/11646"><img src="https://img.shields.io/badge/Pylint-PR_%2311646-3776AB?style=flat-square&logo=python&logoColor=white" alt="Pylint pull request 11646"></a>
 </p>
@@ -50,6 +52,8 @@ I am a Computer Science graduate based in Lahore, Pakistan. My work spans **AI/M
 These contributions strengthened my hands-on experience with:
 
 - reading unfamiliar production code without needing to understand the entire repository first;
+- translating a published research architecture from Keras to idiomatic PyTorch while preserving source traceability;
+- validating scientific implementations with independent numerical output and gradient parity tests;
 - designing regression and branch-coverage tests for legacy migration paths;
 - typed Python, `TypedDict`, overloads, type narrowing, MyPy, and Pylint;
 - large CI pipelines, flaky-test diagnosis, and evidence-based debugging;
@@ -85,7 +89,7 @@ An ESP32-CAM streams video to a FastAPI and OpenCV recognition service, verifies
 
 | Area | Tools and experience |
 | --- | --- |
-| **AI and machine learning** | PyTorch, scikit-learn, deep learning, NLP, computer vision, audio ML, model evaluation, explainable AI |
+| **AI and machine learning** | PyTorch, temporal convolutional networks, scientific model porting, numerical parity testing, scikit-learn, NLP, computer vision, audio ML, model evaluation, explainable AI |
 | **Generative AI** | LLM applications, RAG, LangChain, Hugging Face, FAISS, prompt and retrieval workflows |
 | **Python backend** | FastAPI, REST APIs, JWT authentication, PostgreSQL, MySQL, Pandas, service integration |
 | **Quality engineering** | Pytest-style testing, branch coverage, MyPy, Pylint, Ruff, GitHub Actions, code review |
