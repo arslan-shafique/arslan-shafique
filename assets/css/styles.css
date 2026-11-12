@@ -480,6 +480,7 @@ svg {
   background: radial-gradient(520px 220px at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 72%);
 }
 .oss-card > * { position: relative; }
+.oss-card--featured { grid-column: 1 / -1; }
 .oss-card:hover { border-color: color-mix(in srgb, var(--accent) 48%, var(--line)); transform: translateY(-4px); box-shadow: var(--shadow); }
 .oss-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .oss-card__org { display: flex; align-items: center; gap: 13px; }
@@ -489,6 +490,7 @@ svg {
   box-shadow: 0 10px 28px -12px var(--accent);
 }
 .oss-card__mark--violet { background: linear-gradient(135deg, var(--accent-2), #c084fc); color: #fff; }
+.oss-card__mark--torch { background: linear-gradient(135deg, #ee4c2c, #f97316); color: #fff; }
 .oss-card__org h3 { font-size: 1.16rem; font-weight: 700; }
 .oss-card__org p { margin-top: 2px; font-size: 12.5px; color: var(--text-3); }
 .oss-status {

@@ -54,6 +54,15 @@ export const portfolioKnowledge = [
       "Arslan worked as a freelance video editor from December 2022 to July 2023 and as a part-time video editor for Youth General Assembly from November 2022 to January 2023. He edited event and client videos in Adobe Premiere Pro. A verified Youth General Assembly experience letter is available on the portfolio.",
   },
   {
+    id: "open-source-braindecode",
+    title: "Braindecode TCCNet research contribution",
+    section: "Open Source",
+    href: "#open-source",
+    keywords: ["open source", "opensource", "research", "contribution", "braindecode", "tccnet", "semg", "pytorch", "pull request", "pr", "temporal convolution", "gesture recognition", "numerical parity"],
+    content:
+      "Arslan authored Braindecode pull request #1562, titled '[models] Add TCCNet for sEMG gesture recognition'. The active research-software contribution ports the ICASSP 2019 TCCNet architecture to idiomatic PyTorch with causal temporal convolutions, average-over-time and attention classification heads, explicit variable-length masking, source attribution, model registration, and documentation. Independent NumPy tests verify double-precision output parity and finite-difference input-gradient parity against the pinned reference equations. The pull request adds 623 lines across 9 files, reports passing focused and shared model tests, and is publicly available at https://github.com/braindecode/braindecode/pull/1562. It is currently open and awaiting maintainer review.",
+  },
+  {
     id: "open-source-oppia",
     title: "Oppia open-source contribution",
     section: "Open Source",

@@ -27,6 +27,11 @@ test("retrieves the Oppia contribution for coverage questions", () => {
   assert.equal(first.id, "open-source-oppia");
 });
 
+test("retrieves the Braindecode contribution for research-model questions", () => {
+  const [first] = retrievePortfolioContext("Tell me about Arslan's TCCNet research contribution to Braindecode");
+  assert.equal(first.id, "open-source-braindecode");
+});
+
 test("understands CV as an alias for resume", () => {
   const [first] = retrievePortfolioContext("Where can I download his CV?");
   assert.equal(first.id, "contact-resume");

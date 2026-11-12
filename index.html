@@ -88,8 +88,9 @@
         I build intelligent systems that reach off the screen — large language models and
         retrieval pipelines on the software side, ESP32 sensors and embedded firmware on the
         hardware side. My recent work includes <strong>AI engineering at Techohub Systems</strong>
-        and contributions to <strong>Oppia</strong> and <strong>Pylint</strong>. I am a 2026 Computer
-        Science graduate of the University of Central Punjab.
+        and a research-model contribution to <strong>Braindecode</strong>, alongside open-source work
+        in <strong>Oppia</strong> and <strong>Pylint</strong>. I am a 2026 Computer Science graduate of
+        the University of Central Punjab.
       </p>
 
       <div class="hero__actions reveal">
@@ -152,7 +153,7 @@
   <div class="wrap">
     <ul class="stats reveal">
       <li><strong>5+</strong><span>Years writing code</span></li>
-      <li><strong>2</strong><span>Open-source PRs</span></li>
+      <li><strong>3</strong><span>Open-source PRs</span></li>
       <li><strong>16</strong><span>Certifications</span></li>
       <li><strong>5★</strong><span>Freelance client rating</span></li>
     </ul>
@@ -347,12 +348,40 @@
       <p class="sec-kicker">03 — Open Source</p>
       <h2 class="sec-title">Contributing beyond my own codebase</h2>
       <p class="sec-sub">
-        Production-scale Python work shaped through maintainer feedback, automated tests and
-        public code review.
+        Production-scale Python and scientific deep-learning work shaped through source-paper
+        analysis, automated tests, maintainer feedback and public code review.
       </p>
     </header>
 
     <div class="oss-grid">
+      <article class="oss-card oss-card--featured reveal">
+        <div class="oss-card__top">
+          <div class="oss-card__org">
+            <span class="oss-card__mark oss-card__mark--torch" aria-hidden="true">B</span>
+            <div>
+              <h3>Braindecode</h3>
+              <p>Deep learning for EEG, ECG and MEG</p>
+            </div>
+          </div>
+          <span class="oss-status"><span aria-hidden="true"></span> Under review</span>
+        </div>
+        <p class="oss-card__eyebrow">Latest research contribution · PR #1562</p>
+        <h4>Port the TCCNet sEMG architecture to PyTorch</h4>
+        <p>
+          Reimplemented the ICASSP 2019 TCCNet research architecture for gesture recognition,
+          including causal temporal convolutions, average-over-time and attention heads, and
+          variable-length masking. Independent NumPy tests verify output and gradient parity
+          with the pinned reference equations.
+        </p>
+        <ul class="chips chips--sm">
+          <li>PyTorch</li><li>sEMG</li><li>Temporal CNN</li><li>Numerical Parity</li><li>Research Software</li>
+        </ul>
+        <a class="oss-card__link" href="https://github.com/braindecode/braindecode/pull/1562" target="_blank" rel="noopener noreferrer">
+          View pull request
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
       <article class="oss-card reveal">
         <div class="oss-card__top">
           <div class="oss-card__org">
@@ -409,7 +438,7 @@
     </div>
 
     <p class="oss-note reveal">
-      Both contributions are active and publicly reviewable on GitHub.
+      All three contributions are active and publicly reviewable on GitHub.
       <a href="https://github.com/arslan-shafique?tab=pull-requests" target="_blank" rel="noopener noreferrer">Follow my contribution activity</a>.
     </p>
   </div>
